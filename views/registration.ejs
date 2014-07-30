@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="registration">
+<head>
+  <title>Login to Store</title>
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheets/style.css" />
+  <script src="javascripts/angular-1.2.5/angular.js"></script>
+  <script type="text/javascript" src="javascripts/controller/RegisterControl.js"></script>
+ 
+</head>
+<body>
+  <body ng-controller="RegisterControl">
+    <div ng-include="'/vendor-form'"></div>
+    <h1>Registration</h1>
+      <form name="userInfoForm">
+        <div class="control-group" ng-class="getCssClasses(userInfoForm.email)">
+          <label>E-mail</label>
+          <input type="email" ng-model="user.email" name="email" required>
+          <span ng-show="showError(userInfoForm.email, 'email')" class="help-inline">You must enter a valid email</span>
+          <span ng-show="showError(userInfoForm.email, 'required')" class="help-inline"></span>
+        </div>
+        <label>Last name</label>
+        <input type="text" ng-model="user.lastName" name="lastName" required>
+        <label>First name</label>
+        <input type="text" ng-model="user.firstName" name="firstName" required>
+        <label>Zodiac Sign</label>        
+        <input type="text" ng-model="user.zodiac" name="zodiac">
+        <label>Type of user</label>
+        <select ng-model="user.type" ng-options="type as type for type in types">
+        </select>
+        <div ng-if="user.type=='Vendor'" ng-include="'vendor-form'"></div>
+        <label>Password</label>
+        <input type="password" ng-model="user.password" name="password" required>
+        <label>Password (repeat)</label>
+        <input type="password" ng-model="repeatPassword" name="repeatPassword" required>
+        <br>
+        <button ng-click="save()" ng-disabled="!canSave()">Save</button>
+      </form>
+  </body>
+
+
+</body>
+</html>
