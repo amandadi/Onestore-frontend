@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="registration">
 <head>
-  <title>Login to Store</title>
+  <title>Register to OneStore</title>
   <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
   <link rel="stylesheet" href="stylesheets/style.css" />
   <script src="javascripts/angular-1.2.5/angular.js"></script>
@@ -12,7 +12,7 @@
   <body ng-controller="RegisterControl">
     <div ng-include="'/vendor-form'"></div>
     <h1>Registration</h1>
-      <form name="userInfoForm">
+      <form name="userInfoForm" class="well">
         <div class="control-group" ng-class="getCssClasses(userInfoForm.email)">
           <label>E-mail</label>
           <input type="email" ng-model="user.email" name="email" required>

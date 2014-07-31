@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+	<title>Login</title>
+	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="stylesheets/style.css" />
+	<script src="javascripts/angular-1.2.5/angular.js"></script>
+</head>
+<body>
+	<form class="well">
+		<label>E-mail</label>
+		<input type="email" ng-model="user.login.id" class="span3" />
+		<br>
+		<label>Password</label>
+		<input type="password" ng-model="user.login.password" class="span3" />
+		<br>
+		<button ng-click="expression">Sign in</button>
+	</form>
+
+</body>
+</html>
