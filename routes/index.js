@@ -18,4 +18,8 @@ router.get('/vendor-form', function(req, res) {
   res.render('vendor-form', {});
 });
 
+router.get('/address-form', function(req,res){
+	res.render('address-form',{});
+});
+
 module.exports = router;

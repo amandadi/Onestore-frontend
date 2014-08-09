@@ -10,7 +10,6 @@
 </head>
 <body>
   <body ng-controller="RegisterControl">
-    <div ng-include="'/vendor-form'"></div>
     <h1>Registration</h1>
       <form name="userInfoForm" class="well">
         <div class="control-group" ng-class="getCssClasses(userInfoForm.email)">
@@ -28,7 +27,7 @@
         <label>Type of user</label>
         <select ng-model="user.type" ng-options="type as type for type in types">
         </select>
-        <div ng-if="user.type=='Vendor'" ng-include="'vendor-form'"></div>
+        <div ng-if="user.type=='Vendor'" ng-include="'/vendor-form'"></div>
         <label>Password</label>
         <input type="password" ng-model="user.password" name="password" required>
         <label>Password (repeat)</label>

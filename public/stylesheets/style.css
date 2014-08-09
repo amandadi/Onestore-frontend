@@ -10,7 +10,7 @@ header, footer, aside, nav, article {
 }
 
 body{
-	background-color: #B8B8B8;
+	background-color: #ff9933;
 	padding: 10px; 
 }
 h1 {
@@ -48,4 +48,11 @@ top: 50%;
 left: 50%;
 margin-top: -50px;
 margin-left: -100px;
+}
+
+.center{
+	width: 100%;
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
 }
