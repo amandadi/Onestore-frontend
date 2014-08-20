@@ -8,15 +8,15 @@
 </head>
 <body>
 	<div class="span7 center">
-		<form class="well">
+		<form name="loginForm" class="well" ng-submit="login(user)">
 			<label>E-mail</label>
 			<input type="email" ng-model="user.login.id" class="span3" placeholder="E-mail here..." />
 			<br>
 			<label>Password</label>
 			<input type="password" ng-model="user.login.password" class="span3" placeholder="Password here..."/>
 			<br>
-			<button ng-click="expression" class="btn btn-primary">Sign in</button>
-			<button class="btn" ng-click="">Clear</button>
+			<button class="btn btn-primary">Sign in</button>
+			<!--<button class="btn">Clear</button>-->
 		</form>
 	</div>
 

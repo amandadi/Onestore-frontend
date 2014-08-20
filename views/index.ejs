@@ -3,27 +3,19 @@
 	One Store Home Page
 	@Author Ravi & Amar
 -->
-<html>
+<html lang="en" ng-app="oneStore">
 <head>
 	<title>One Store</title>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="stylesheets/style.css" />
-	
+
 </head>
 <body>
-	<nav class="topright">
-		<a href="/login"><button class="btn btn-primary">Sign In</button></a>
-		<a href="/registration"><button class="btn btn-primary">Registration</button></a>
-	</nav>
-	<section id="header">
-		<header>
-			<h1>Welcome to Price Store</h1>
-			<p>Ecommerce for EveryOne</p>
-		</header>
-		<footer>
-			<a href="http://www.google.com"><button class="btn">Proceed to browse</button></a>
-		</footer>
-	</section>
+	<div ng-view></div>
+	<script src="javascripts/angular-1.2.5/angular.js"></script>
+	<script src="javascripts/angular-1.2.5/angular-route.js"></script>
+	<script src="javascripts/app.js"></script>
+
+	<script src="javascripts/controller/homeCtrl.js"></script>
+	<script src="javascripts/controller/loginCtrl.js"></script>
+	<script src="javascripts/controller/registrationCtrl.js"></script>
 </body>
 </html>

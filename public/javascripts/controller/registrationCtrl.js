@@ -1,13 +1,13 @@
-angular.module('registration', []).controller('RegisterControl', function($scope) {
+'use strict';
 
-  $scope.json
+app.controller('registrationCtrl',function($scope,$location) {
 
   $scope.types = ['User','Vendor'];
+  var userInfo;
+  $scope.save = function(user){
+    console.log(user);
+  };
 
-  $scope.go = function ( path ) {
-  $location.path( path );
-};
-  
   $scope.getCssClasses = function(ngModelContoller) {
     return {
       error: ngModelContoller.$invalid && ngModelContoller.$dirty,
