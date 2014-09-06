@@ -6,34 +6,46 @@
   <link rel="stylesheet" href="stylesheets/style.css" />
   <script src="javascripts/angular-1.2.5/angular.js"></script>
   <script src="javascripts/angular-1.2.5/angular-route.js"></script>
-  <script type="text/javascript" src="javascripts/controller/RegisterControl.js"></script>
+
+  
  
 </head>
   <body>
     <h1>Registration</h1>
       <form name="userInfoForm" class="well" ng-submit="save(user)">
-        <div class="control-group" ng-class="getCssClasses(userInfoForm.email)">
-          <label>E-mail</label>
-          <input type="email" ng-model="user.email" name="email" required>
-          <span ng-show="showError(userInfoForm.email, 'email')" class="help-inline">You must enter a valid email</span>
-          <span ng-show="showError(userInfoForm.email, 'required')" class="help-inline"></span>
+       <div class="form-group" ng-class="{ 'has-error' : userInfoForm.email.$invalid && !userInfoForm.email.$pristine }">
+          <label>E-mail*</label>
+          <input type="email" ng-model="user.email" class="form-control" name="email" required>
+          <p ng-show="userInfoForm.email.$invalid && !userInfoForm.email.$pristine" class="help-block">You Email is required.</p>
         </div>
-        <label>Last name</label>
-        <input type="text" ng-model="user.lastName" name="lastName" required>
+        <div class="form-group" >
         <label>First name</label>
         <input type="text" ng-model="user.firstName" name="firstName" required>
-        <label>Zodiac Sign</label>        
-        <input type="text" ng-model="user.zodiac" name="zodiac">
+        </div>
+        <div class="form-group">
+        <label>Last name</label>
+        <input type="text" ng-model="user.lastName" name="lastName" required>     
+        </div>
+        
+        <div class="form-group">
         <label>Type of user</label>
-        <select ng-model="user.type" ng-options="type as type for type in types">
+        <select ng-model="user.role" ng-options="type as type for type in types">
         </select>
-        <div ng-if="user.type=='Vendor'" ng-include="'/vendor-form'"></div>
+        </div>
+        <div ng-if="user.role=='Vendor'" ng-include="'/vendor-form'"></div>
+        <div class="form-group">
         <label>Password</label>
-        <input type="password" ng-model="user.password" name="password" required>
-        <label>Password (repeat)</label>
-        <input type="password" ng-model="repeatPassword" name="repeatPassword" required>
+        <input type="password" data-ng-model="user.password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" ng-model="repeatPassword" id="repeatPassword" name="repeatPassword" data-password-verify="user.password" required>
+        </div>
+        <p ng-show="userInfoForm.repeatPassword.$error.passwordVerify" class="help-block">
+        Fields are not equal!</p>
         <br>
         <button class='btn btn-primary'>Save</button>
       </form>
+      <pre>{{user}}</pre>
   </body>
 </html>
