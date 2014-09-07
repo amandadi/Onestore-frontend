@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='en'  ng-app="registration">
 <head>
   <title>Register to OneStore</title>
   <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
   <link rel="stylesheet" href="stylesheets/style.css" />
   <script src="javascripts/angular-1.2.5/angular.js"></script>
-  <script src="javascripts/angular-1.2.5/angular-route.js"></script>
-
+  <script src="javascripts/controller/registrationCtrl.js"></script>
+  
   
  
 </head>
-  <body>
+  <body ng-controller="registrationCtrl">
     <h1>Registration</h1>
-      <form name="userInfoForm" class="well" ng-submit="save(user)">
+    <div class="well">
+      <form name="userInfoForm"  ng-submit="save(user)">
        <div class="form-group" ng-class="{ 'has-error' : userInfoForm.email.$invalid && !userInfoForm.email.$pristine }">
           <label>E-mail*</label>
           <input type="email" ng-model="user.email" class="form-control" name="email" required>
@@ -44,8 +45,22 @@
         <p ng-show="userInfoForm.repeatPassword.$error.passwordVerify" class="help-block">
         Fields are not equal!</p>
         <br>
-        <button class='btn btn-primary'>Save</button>
+      
       </form>
-      <pre>{{user}}</pre>
+      <p id="userdata" hidden>{{user}}</p>
+
+      <form id="userForm" name="userForm" action="/registrationCheck" method="post">
+        <input type="hidden" id="user" name="user" >
+        <button type="button" onclick="regSubmit()" class='btn btn-primary'>Save</button>
+        <button type="button" class="btn">Clear</button>
+      </form>
+      </div>
+      <script type="text/javascript">
+      function regSubmit(){
+        document.getElementById('user').value=document.getElementById('userdata').innerHTML;
+        document.getElementById('userForm').submit();
+      }
+
+      </script>
   </body>
 </html>

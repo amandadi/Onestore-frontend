@@ -1,9 +1,6 @@
 'use strict'
 
-app.controller('loginCtrl', function($scope,$location){
+angular.module('login',[]).controller('loginCtrl', function($scope,$location, $http){
 
-	$scope.login=function(user){
-		console.log(user);
-		$location.path('/userHome');
-	};
+	
 });
