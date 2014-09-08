@@ -7,37 +7,46 @@ var client = new Client();
 /* GET home page. */
 
 var ses;
-var isAuthenticate=true;
+var isAuthenticate=false;
 
-router.get('/checkUser',function(req,res){
 
-  sessionInit(req,res);
 
-});
-
-router.get('/userHome/*',function(req,res, next){
-    console.log("=============interceptor=============");
+router.get('/user/*',function(req,res, next){
+    console.log("=============interceptor=====userHome========");
     var sess=req.session;
-    if(sess.authenticate){
+    if(sess.authenticate && sess.role=='User'){
 
         next();
     }
     else{
         res.redirect('/login');
     }
-
-
-
 });
 
-router.get('/userHome',function(req,res){
 
-  res.send('<h1>Login Sucessfull!!!!</h1>');
+router.get('/vendor/*',function(req,res, next){
+    console.log("=============interceptor=======vendorHome======");
+    var sess=req.session;
+    if(sess.authenticate && sess.role=='Vendor'){
 
-
+        next();
+    }
+    else{
+        res.redirect('/login');
+    }
 });
 
-router.get('/userHome/test', function(req,res){
+router.get('/vendor/home',function(req,res){
+
+  res.render('vendorHome',{});
+});
+
+router.get('/user/home',function(req,res){
+
+  res.render('userHome',{});
+});
+
+router.get('/user/test', function(req,res){
 
   res.send("<h1>test</h1>");
 });
@@ -50,15 +59,42 @@ router.post('/checkUser',function(req,res){
 });
 
 function sessionInit(req, res){
-  console.log('=============>>>'+req.body.email);
+  
   ses=req.session;
   ses.authenticate=false;
-  if(isAuthenticate){
-  ses.authenticate=true;
-  res.redirect('/userHome');
-  }
+
+  var data=JSON.stringify(req.body);
+  var args = {data:data,headers:{"Content-Type": "application/json"} };
+  client.post("http://localhost:8080/OneStoreServiceRouter/authenticate", args, function(data,response) {
+        console.log("========response========"+data)
+        if(data!='authenticationfail'){
+          isAuthenticate=true;
+          console.log('==========data========'+data);
+          
+          if(isAuthenticate){
+          ses.authenticate=true;
+          
+          if(data=='User'){
+          ses.role=data;
+          res.redirect('/user/home');
+          }
+          if(data=='Vendor'){
+            ses.role=data;
+          res.redirect('/vendor/home');
+          }
+          }
+          else{
+            res.redirect('/login');
+          }
+        }
 
 
+}
+    ).on('error',function(err){
+            console.log('something went wrong on the request', err.request.options);
+            res.send('error');
+        });
+  
 }
 
 router.get('/', function(req, res) {
@@ -92,10 +128,7 @@ console.log("-----------------------"+data);
 var args = {data:data,headers:{"Content-Type": "application/json"} };
 
 client.post("http://localhost:8080/OneStoreServiceRouter/userinfo", args, function(data,response) {
-      // parsed response body as js object
-    console.log('**************'+data);
-    // raw response
-    console.log('###############'+response);
+      
 res.redirect('/registrationsuccess');
 }
     ).on('error',function(err){
